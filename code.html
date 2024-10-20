@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+ /* Author: Duy Le */
+ /* Date: 20/10/24 */
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balls Twisted</title>
+    <style>
+        body {
+            min-height: 100vh;
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: 0;
+            position: relative;
+        }
+
+        h1, h2, h3 {
+            animation: fadeInUp 2s ease;
+            opacity: 1; 
+            margin: 0;
+        }
+
+        h1 {
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 5em;
+        }
+        h3 {
+            color: rgb(255, 112, 112);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 5em;
+        }
+        h2 {
+            color: cyan;
+            font-family: sans-serif;
+            font-size: 2em; 
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .heart {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: relative;
+            transform: rotate(-45deg);
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.5), 
+                        0 0 30px rgba(255, 0, 0, 0.4), 
+                        0 0 40px rgba(255, 0, 0, 0.3), 
+                        0 0 50px rgba(255, 0, 0, 0.2);
+            animation: pulse 1s infinite;
+            margin-top: 70px;
+        }
+
+        .heart::before, .heart::after {
+            content: "";
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            border-radius: 50%;
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.5), 
+                        0 0 30px rgba(255, 0, 0, 0.4), 
+                        0 0 40px rgba(255, 0, 0, 0.3), 
+                        0 0 50px rgba(255, 0, 0, 0.2);
+        }
+
+        .heart::before {
+            top: -50px;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: 50px;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1) rotate(-45deg);
+                box-shadow: 0 0 20px rgba(255, 0, 0, 0.5), 
+                            0 0 30px rgba(255, 0, 0, 0.4), 
+                            0 0 40px rgba(255, 0, 0, 0.3), 
+                            0 0 50px rgba(255, 0, 0, 0.2);
+            }
+            70% {
+                transform: scale(1.2) rotate(-45deg);
+                box-shadow: 0 0 30px rgba(255, 0, 0, 0.6), 
+                            0 0 40px rgba(255, 0, 0, 0.5), 
+                            0 0 50px rgba(255, 0, 0, 0.4), 
+                            0 0 60px rgba(255, 0, 0, 0.3);
+            }
+            100% {
+                transform: scale(1) rotate(-45deg);
+                box-shadow: 0 0 20px rgba(255, 0, 0, 0.5), 
+                            0 0 30px rgba(255, 0, 0, 0.4), 
+                            0 0 40px rgba(255, 0, 0, 0.3), 
+                            0 0 50px rgba(255, 0, 0, 0.2);
+            }
+        }
+
+        @keyframes flutter {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                transform: rotate(10deg) scale(1.05);
+            }
+            50% {
+                transform: rotate(0deg) scale(1);
+            }
+            75% {
+                transform: rotate(-10deg) scale(0.95);
+            }
+        }
+
+        .flower {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            animation: sway 5s infinite ease-in-out;
+            transform-origin: center bottom;
+        }
+
+        .petal {
+            width: 60px;
+            height: 60px;
+            background-color: pink;
+            border-radius: 50%;
+            position: absolute;
+            transform-origin: center center;
+            animation: flutter 3s infinite ease-in-out;
+        }
+
+        .petal:nth-child(1) {
+            top: 0;
+            left: 45px;
+            animation-delay: 0s;
+        }
+
+        .petal:nth-child(2) {
+            top: 45px;
+            left: 0;
+            animation-delay: 1s;
+        }
+
+        .petal:nth-child(3) {
+            top: 45px;
+            right: 0;
+            animation-delay: 2s;
+        }
+
+        .petal:nth-child(4) {
+            bottom: 0;
+            left: 45px;
+            animation-delay: 3s;
+        }
+
+        .center {
+            width: 50px;
+            height: 50px;
+            background-color: yellow;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes sway {
+            0% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(5deg);
+            }
+            50% {
+                transform: rotate(0deg);
+            }
+            75% {
+                transform: rotate(-5deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .flower.top-left {
+            top: 5%;
+            left: 5%;
+        }
+
+        .flower.top-right {
+            top: 5%;
+            right: 5%;
+        }
+
+        .flower.bottom-left {
+            bottom: 5%;
+            left: 5%;
+        }
+
+        .flower.bottom-right {
+            bottom: 5%;
+            right: 5%;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>STEM</h1>
+<h2>OF THANG LONG</h2>
+<h3>Happy Women's Day!</h3>
+<div class="heart"></div>
+
+<div class="flower top-left">
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="center"></div>
+</div>
+
+<div class="flower top-right">
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="center"></div>
+</div>
+
+<div class="flower bottom-left">
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="center"></div>
+</div>
+
+<div class="flower bottom-right">
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="center"></div>
+</div>
+
+</body>
+</html>
